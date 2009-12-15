@@ -1,0 +1,24 @@
+#!/bin/sh
+
+## A.R.Karthick for MIR
+### Make a boot disk by installing GRUB and the general infrastructure
+
+echo "Formatting Floppy" 1>&2
+mformat a: || exit 1
+
+echo "Creating Directories" 1>&2
+mmd a:/boot || exit 1
+mmd a:/boot/grub || exit 1
+mmd a:/modules || exit 1
+
+echo "Copying files" 1>&2
+mcopy grub/boot/grub/stage1 a:/boot/grub || exit 1
+mcopy grub/boot/grub/stage2 a:/boot/grub || exit 1
+mcopy grub/boot/grub/menu.lst a:/boot/grub || exit 1
+
+echo "Installing grub" 1>&2
+grub --batch << EOF 1>/dev/null 2>&1 || exit 1
+device (fd0)
+install (fd0)/boot/grub/stage1 (fd0) (fd0)/boot/grub/stage2 p (fd0)/boot/grub/menu.lst
+EOF
+

@@ -1,0 +1,181 @@
+Pratap 
+	Added basic sound blaster detection, mixer, and (non-functional) 
+	playing capabilities. Minor hacks to get vesa working in reorganised
+	src, added TODO.
+
+A.R.Karthick for MIR
+
+	Initiator and Author: Pratap
+
+
+Karthick-Done some massive reorganisation and some rewrites of the whole tree.
+Karthick-Rewrote the Makefile to make it more structured.
+Karthick-Implemented process management and memory Management.
+ (scheduler,timer,wait_queue,slab_cache,bitmap allocator).
+Karthick-Enabled PAGING with a direct mapping.
+Karthick-Implemented vmalloc or virtual contiguous and physical non-contiguous           allocation.	  
+Karthick-Implemented CPU exception handling
+  (20 exceptions are handled.The process causing the exception is killed.Check out the code for the rest.The exception handling interface is a bit generic though.)
+Karthick- Implemented an additional pgtable cache for fast pgtable mappings to setup the PTE entries.(for use with vmalloc primarily:)
+Karthick- Wrote reboot routine and halt routine now comes out of BOCHS by causing a triple fault.
+Karthick- Fixed some minor things with the keyboard driver.
+
+9/11/2003:
+Karthick - Implemented Semaphores for MIR Kernel which is a part of IPC.
+Karthick - Brought in asm/time.h for read time stamp counter.Some more work needs to be done in this aspect.
+
+8/12/2003 -
+Karthick-  Changed the bitoperations and brought in a new implementation which is sophisticated and uses assembly to speed up bit operations.
+	  include/asm/bitops.h
+	
+28/12/2003-
+Karthick
+	 Brought in a change in the way gdt,idts are handled.
+	 Recoded multi.asm as multi.S
+	 Brought in descriptor definitions and introduced clarity in the code.
+	 Recoded the processor identification routines.
+	 Quite a few changes which also includes a new file processor.c,
+	 asm/segment.h
+01/01/2004-
+Karthick
+	Brought in changes to make MIR boot from a floppy.
+	Plus some trivial changes to CPU detection + multi.S debugging 
+	enhancement to make debugging comfortable during crashes with MIR 
+	bootstraps from floppy.
+
+06/01/2004-
+Karthick
+	Brought in major changes with keyboard driver rewrites,
+	virtual console preliminary setup, plus various other hacks
+	related to keyboard driver rewrites.
+
+11/01/2004-
+Karthick
+	Brought in full fledged virtual console support.
+	Fixed some major bugs related to spurious crashes.
+	Made changes to accomodate for ret_eip and argument maintenance
+	for tasks.
+	Wrote a stress testing module to create and kill 30 tasks.
+	Made random hacks and additions to the source.
+
+08/02/2004-
+Karthick
+	Rewrote the IRQ interface to make it generic and controller independent. Changed other parts of the code accordingly.
+
+15/02/2004 -
+Karthick
+	Introduced Tasklets and changed the corresponding code to use tasklets.
+
+22/02/2004 -
+Karthick
+	Worked on some hangs related in MIR
+
+24/02/2004-
+Karthick
+        Got a reboot hang report and worked on some spawn_test_task hangs with the stress test module. Fixed the hangs by introducing a call to __schedule
+which is to be used as of now when using the scheduler from Kernel space.
+Also corrected some CLI,STI calls with respect to save_flags and restore_flags.
+Made sure that the scheduler is now called with interrupts disabled,to pick up the next task. Fixed some races related to these issues also.
+Made a stable release for MIR	
+
+29/02/2004-
+Karthick
+	Did some hacks to the MIR code in general.Introduced a bottom half
+	in the keyboard driver.Corrected a memory leak in slab allocator,
+	+ other random hacks
+
+01/03/2004-
+Karthick	
+	Did some hacks to the MIR code in general.Corrected some IRQ calls.
+	Did some random changes to the MIR tree in general,towards a stable release. Removed some old unused stale files from the MIR cvs of ark-mir004 branch.
+
+08/03/2004-
+Karthick
+	 Random hacks and fixes to the MIR code.
+	 Changed the asm/string.h and asm/bitops.h functions to take the early clobber operand into account. Rewrote the memset,memcpy routines to optimise them by using a combination movsl and movsb to save CPU cycles.
+
+27/03/2004-
+Karthick
+	Tested the changes to bitops.h and string.h. Some spurious crashes happen, but difficult to trace. Anyway, its pretty much stable with changes to bitops.h and string.h
+	IDE driver started. Modified the IDE driver of TABOS, and made it work with MIR. Implemented the BUFFER cache for MIR.
+
+28/03/2004-
+Karthick	
+	Some minor IDE driver changes to integrate with the current release for Pratap to check out.
+	This should get into 005.
+	
+03/04/2004-
+Karthick
+	IDE driver changes to make ide writes go through.Changes to make it work with BOCHS by bootstrapping through the hard disk image.Tested read/writes w.r.t to IDE driver.
+
+11/04/2004-
+Karthick
+	IDE ATAPI CDROM driver changes.
+	Tested the driver changes.Some more additions to the shell commands.
+	Changed the buffer cache to call device/major number specific block_transfer_function registered by each device.
+
+25/04/2004-
+Karthick	
+	 Some Kernel ELF changes to show ksyms.Some routines added in utils.
+
+05/05/2004-
+Karthick
+	Revamped Module loader for MIR with rmmod support,and one can export symbols.
+
+30/05/2004-
+Karthick	
+	Merged Prataps VFS changes to my tree.
+	Introduced string routines in assembly
+	Made some random hacks.
+	Ready for making changes for a stable VFS.
+
+06/06/2004-
+	VFS changes for VFS cache lookup. Total reimplementation
+	of cd,ls,cat etc. Introduced enhanced parsing for the VFS.
+	Speeded up the lookup procedure through a VFS cache.
+	Many other random hacks.
+
+12-13/06/2004-
+ 	Massive changes ,additions to the MIR tree.
+	Implemented VFS changes for generic block devices to go through the buffer cache.
+	Made the FDC also to go through the cache.
+	Implemented generic transfer routines for block devices.
+	Added these new files:
+	
+	a) include/mir/floppy.h 
+	b) include/mir/fs/fat.h
+	c) mir/fs/fat/fat_commands.c
+	d) mir/fs/vfs.c  (old: kernel/vfs directory)
+	d)mir/drivers/block/blockops.c
+
+	Massive changes/additions to the following files and renamed them as "vfs.*"
+	
+	a) include/mir/vfs/vfs.h (old -> vnode.h )
+	b)mir/fs/vfs.c - (old kernel/vfs/vnode.c)
+	c) Removed the kernel/vfs directory
+	d) Removed the file mir/fs/fat.c 
+
+	Massive changes to VFS,block device layer,generic devices related to VFS.
+	Changes to the FDC driver, IDE block drivers to make use of the generic DEVICE interface in VFS.
+	Released version 0.05 for MIR	
+
+20/06/2004- Karthick
+	Implemented multiple mount point support.
+	Implemented mount,umount,devices,fstab,pwd shell commands
+	Enhanced mount,umount interface.
+	Changed VFS implementation accordingly.
+	Updated INSTALL.txt accordingly
+
+26/06/2004 -Karthick
+       Some changes to the cdrom driver and other random hacks.
+       Created a mir_005 CVS branch.
+
+03/07/2004 -Karthick
+	Implemented File Management routines.
+	Introduced per process file management structure.
+	Moved cwd to per process.
+	Cleaned up a subtle memset bug, and made it faster.
+	Increased the THREAD_SIZE to 16K now ,so as to a have
+	a larger stack size for processes,to prevent stack underruns,
+	resulting in general protection exception.
+	Other random hacks to the MIR subsystem in General.

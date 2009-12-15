@@ -1,0 +1,12 @@
+/8259a.c/1.1.1.1/Sat Jun 26 13:56:39 2004//
+/Makefile/1.1.1.1/Sat Jun 26 13:56:39 2004//
+/exceptions.S/1.1.1.1/Sat Jun 26 13:56:39 2004//
+/irq.c/1.1.1.1/Sat Jun 26 13:56:44 2004//
+/processor.c/1.1.1.1/Sat Jun 26 13:56:44 2004//
+/reboot.c/1.1.1.1/Sat Jun 26 13:56:44 2004//
+/setup.c/1.1.1.1/Sat Jun 26 13:56:55 2004//
+/system.c/1.1.1.1/Sat Jun 26 13:56:55 2004//
+/timer.c/1.1.1.1/Sat Jun 26 13:56:55 2004//
+/traps.c/1.1.1.1/Sat Jun 26 13:56:55 2004//
+/vmalloc.c/1.1.1.1/Sat Jun 26 13:57:05 2004//
+D

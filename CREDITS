@@ -1,0 +1,33 @@
+This is the credits-file of people that have contributed to the MIR project.Thefields are: name (N), email (E), web-address(W),description (D), and snail-mailaddress (S).Note- The list is sorted alphabetically and _not_ by order of importance.So if you add your names to this file,make sure that its in alphabetical order,before you mail the patch file.
+Thanks,
+ -Karthick
+
+N: A.R.Karthick
+E: karthick_r@infosys.com
+E: a_r_karthic@rediffmail.com,a_r_karthic@yahoo.com,a.r.karthick@gmail.com
+W: http://mir-os.sourceforge.net
+W: http://kernelnewbies.org/wiki/moin.cgi/Karthick
+D: Implemented Process Mgmt,Memory Mgmt, CPU Exception handling,etc.
+D: Implemented various memory allocators like bitmap,slab cache,vmalloc
+D: Enabled page tables 
+D: Implemented Semaphores for IPC.
+D: Keyboard driver
+D: Generic controller independent IRQ handling for MIR
+D: Tasklets implementation for MIR
+D: Ported IDE and CDROM from TABOS and modified it to work with MIR
+D: RMMOD, EXPORT_SYMBOL and other support for Dynamic Module loading.
+D: VFS + FILE Management
+D: Various other random hacks to the MIR subsystem in general.
+S: Bangalore
+S: Chennai
+
+N: Pratap-The King
+E: xtremist31337@yahoo.com,pratap_theking@hotmail.com
+W: http://mir-os.sourceforge.net
+D: Original MIR Hacker and initiator!!
+D: Drivers works like terminal,mouse,sound.
+D: Dynamic Module loading through lsmod,insmod
+D: VFS
+D: Various other hacks related to the MIR subsystem in general.
+S: Bangalore
+

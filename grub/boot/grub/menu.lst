@@ -1,0 +1,9 @@
+default 0
+timeout 10
+
+title MIR-OS 002
+root (fd0)
+kernel /boot/mir.elf
+module /modules/testmod.o
+module /modules/testmod1.o
+module /modules/testmod2.o

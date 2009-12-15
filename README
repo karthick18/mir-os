@@ -1,0 +1,32 @@
+MIR-OS 
+  
+
+Entire OS written from scratch
+except 
+	1) vsprintf - from linux 0.0.1, thanks to linus
+	2) 50% of the fdc code - thanks to fabian
+
+NOTES on vesa usage on bochs (this wont work until we get v86 support)
+	1) you have to change the default VGA rom (in bochsrc.txt) from 
+	/usr/local/share/bochs/VGABIOS-elpin-2.40
+	to
+	/usr/local/share/bochs/VGABIOS-lgpl-latest.
+
+	bochs supports only 1024x768x256, 8bpp
+
+NOTES on floppy image
+there is an floppy image in the root dir of mir-os which has grub pre-installed.
+so to install mir-os kernel + modules onto it do the following
+
+#mkdir /mir_img
+#losetup /dev/loop0 grubimg
+
+and 
+#make
+
+this will 'make' mir-os and install the required kernel and modules into the floppy image file which is mounted on a pseudo block device.
+
+
+
+- pratap
+

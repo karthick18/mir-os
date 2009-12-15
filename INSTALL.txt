@@ -1,0 +1,93 @@
+ MIR Install HOWTO:
+  MIR can be bootstrapped through a FLOPPY or through BOCHS-Intel Emulator.
+  This can be controlled with the "Makefile" variable "BOCHS :"
+  Change that variable correctly to boot MIR on floppy or BOCHS.
+
+  Note: By default its setup to boot from FLOPPY. So change the BOCHS := y
+  to make to load on BOCHS.
+
+First untar the Mir sources and cd to the directory containing the sources.
+
+  1) Bootstrapping MIR through Floppy:
+   Its very simple to install MIR on a floppy.
+   If the floppy hasnt been setup with GRUB and the standard MIR setup,
+   type the following:
+  
+   "./make_boot or sh make_boot"
+   And then type:
+    "make"
+  Thats it!! You can bootstrap your floppy with MIR.
+
+ 2) Bootstrapping MIR through BOCHS:
+   Just type "make"
+   Thats it for BOCHS !! Then fire MIR in action through BOCHS,by typing:
+   "bochs -q"
+   Bochs can be downloaded from bochs.sourceforge.net
+
+ Bochs reads the config file bochsrc.txt that comes with the MIR tarball,
+ and hence you neednt bother about that.
+ Just make sure that you are in X when you type bochs -q
+
+3) Making the hard disk image for MIR to bootstrap through hard disk.
+   After making the image, make sure that you use bochsrc_disk.txt as the config file, and change the "path=hard_disk.img" accordingly to the image _name_ that you create, and also the "ata0-master" entry if you create an image of different size, as shown by the output of bximage.
+ Do the following to create ~10MB hard disk image for BOCHS.
+  3.1) bximage
+ Create the hard disk image by typing the above command "bximage" that is interactive.
+ 3.2) Copy the grubimg directly into this.
+ Setup the loopback device to point to the hard disk image.
+ losetup -d /dev/loop0
+ losetup /dev/loop0 hard_disk.img
+ dd if=grubimg of=/dev/loop0 bs=1k 
+ Now create a partition through "fdisk".
+ Make sure to delete the stray partitions that it will show.
+ 3.3) Change the "boot:" section in BOCHS to:
+  "boot: disk"
+
+4) MIR SHELL prompt commands:
+
+Type "help" for the commands available.
+You have virtual console support also with MIR. To use virtual consoles 
+with MIR bootstrapped through a floppy,use keys "CTRL+F1 -F12".
+
+With BOCHS ,use keys F1 through F12.
+
+Sample commands:
+1) ps
+2) kill [ pid | process_name ]
+3) spawn_test_task [ process_name ] ##forks 3 test tasks with 1 getting killed on Cpu exception and some IPC-sem. tests on the rest.
+
+4) free ##checks the Free memory.Actually we have a biosmap scan to determine the amount of RAM,but with BOCHs you can regulate your MEM. see the config file bochsrc.txt for "megs" option that decides the RAM.
+
+5) test_{slab_cache,vmalloc,etc} versions to stress test the MM
+
+6) insmod [ module nr | module name] ##test with insmod 0 or testmod.o.You can add modules like you can find in the modules directory of the source.Just make sure to modify the /etc/grub file after mounting grubimg on the loopback to add modules with grubs "module" option
+
+7) lsmod ##list the modules
+
+8) reboot 
+
+9) halt 
+
+10) cpu_cache ## cpu cache info
+11) cpu_brand ## cpu brand info. 
+12) cpu_features ##cpu features
+13) cpu_type  ## cpu type info.
+## Following should be used with hard_disk image boots and _not_ with floppy image boots
+14) test_ide_read [block] ##will be converted into sectors
+15) test_ide_write [block] ## will be converted into sectors and allows writes after a particular limit checked in main.c
+16) test_cdrom_read [block] ## will be converted into sectors before reading from ATAPI cdrom drive
+17) fstab ## check for mounted devices
+18) devices ## check for available devices
+19) mount MOUNTPOINT FSNAME DEVICE
+20) umount MOUNTPOINT
+21) cd ## change working directory
+22) pwd ##current working directory
+
++ some more commands that you can check out with "help"
+ 
+ Happy hacking with MIR !!Sorry that there is no Documentation regarding MIR,
+ but we will soon get that up.
+  
+   -Karthick (a_r_karthic@rediffmail.com,a_r_karthic@hotmail.com,a_r_karthic@yahoo.com,a.r.karthick@gmail.com,a_r_karthic@users.sourceforge.net)
+
+  

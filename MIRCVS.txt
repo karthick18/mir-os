@@ -1,0 +1,14 @@
+                    MIR-OS CVS ACCESS INFO:
+
+The present MIR version is MIR 005.                 
+This file contains the CVS access info:
+Accessing the mir_005 branch for MIR that contains the Most Recent Tree.
+
+ export CVSROOT=":pserver:anonymous@cvs.sourceforge.net:/cvsroot/mir-os"
+ cvs login ## password [ENTER] 
+ cvs -z3 co mir_005
+
+ 
+
+
+    
