@@ -1,1 +1,1 @@
-#include <stdio.h>
+#define _DUMMY_C 1

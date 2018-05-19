@@ -1,0 +1,10 @@
+  1) Bootstrapping MIR through Floppy:
+   Its very simple to install MIR on a floppy.
+   If the floppy hasnt been setup with GRUB and the standard MIR setup,
+   type the following:
+  
+   "./make_boot or sh make_boot"
+   And then type:
+    "make"
+  Thats it!! You can bootstrap your floppy with MIR.
+

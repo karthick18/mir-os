@@ -2,45 +2,45 @@
 floppya: 1_44="grubimg", status=inserted
 # no floppyb
 ata0:   enabled=1, ioaddr1=0x1f0, ioaddr2=0x3f0,  irq=14
-ata1:   enabled=1, ioaddr1=0x170, ioaddr2=0x370,  irq=15
+#ata1:   enabled=1, ioaddr1=0x170, ioaddr2=0x370,  irq=15
 ata1: enabled=0
 ata2: enabled=0
 ata3: enabled=0
-romimage: file=/usr/share/bochs/BIOS-bochs-latest, address=0xf0000
-vgaromimage: /usr/share/bochs/VGABIOS-lgpl-latest
+romimage: file=/usr/share/bochs/BIOS-bochs-latest
+vgaromimage: file=/usr/share/bochs/VGABIOS-lgpl-latest
 megs: 64
 parport1: enabled=1, file=""
 com1: enabled=1, dev=""
 # no sb16
-sb16: midimode = 1, midi = /dev/midi, wavemode = 1, wave = /dev/dsp, loglevel=5, log = /root/sb.log, dmatimer = 750000
+sb16: midimode = 1, midi = /dev/midi, wavemode = 1, wave = /dev/dsp, loglevel=5, log = sb.log, dmatimer = 750000
 ##atapi disk
 ata0-master: type=disk, path=hard_disk.img, translation=lba, cylinders=20, heads=16, spt=63 
-cdromd: dev=/dev/cdrom, status=inserted
+#cdromd: dev=/dev/cdrom, status=inserted
 ##boot: floppy
 boot: disk
 floppy_bootsig_check: disabled=0
 vga_update_interval: 300000
 keyboard_serial_delay: 20000
 keyboard_paste_delay: 100000
-floppy_command_delay: 50000
-ips: 500000
-pit: realtime=1
-text_snapshot_check: 1
+#floppy_command_delay: 50000
+cpu: count=1, ips=1000000
+clock: sync=realtime, time0=local
+#text_snapshot_check: 1
 mouse: enabled=0
 private_colormap: enabled=0
 i440fxsupport: enabled=0
-time0: 0
+#time0: 0
 # no ne2k
-newharddrivesupport: enabled=1
+#newharddrivesupport: enabled=1
 # no loader
-log: /root/bochs.log
+log: bochs_disk.log
 logprefix: %t%e%d
 debugger_log: -
 panic: action=fatal
 error: action=report
 info: action=report
 debug: action=ignore
-pass: action=report
+#pass: action=report
 keyboard_mapping: enabled=0, map=
 keyboard_type: mf
 user_shortcut: keys=none

@@ -1,5 +1,5 @@
 /* MIR-OS IDE driver
-   ;   a_r_karthic@rediffmail.com ; karthick_r@infosys.com
+   ;   a.r.karthick@gmail.com ; a_r_karthic@rediffmail.com
    ;  
    ;    Copyright (C) 2003-2004
    ;              i) TABOS team.
@@ -541,7 +541,6 @@ int __init init_ide( int argc, char **argv )
   ide_device[ 2 ] -> base = ide_device[ 3 ] -> base = 0x170;
   ide_device[ 0 ] -> connection = ide_device[ 2 ] -> connection = 0xa0;
   ide_device[ 1 ] -> connection = ide_device[ 3 ] -> connection = 0xb0;
-
   ide_probe_controller();
 
   ide_probe_devices( 0 );

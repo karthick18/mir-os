@@ -1,6 +1,6 @@
 /*   MIR-OS : Scheduler helper routine.
 ;    Copyright (C) 2003 A.R.Karthick 
-;    <a_r_karthic@rediffmail.com,karthick_r@infosys.com>
+;    <a.r.karthick@gmail.com,a_r_karthic@rediffmail.com>
 ;
 ;    This program is free software; you can redistribute it and/or modify
 ;    it under the terms of the GNU General Public License as published by
@@ -37,7 +37,7 @@ static __inline__ void setup_tss(struct task_struct *next,struct task_struct *pr
   deactivate_tss(prev);
 }
 
-void __switch_to(struct task_struct *next,struct task_struct *prev) {
+FASTCALL_DEFINE(void __switch_to(struct task_struct *next,struct task_struct *prev)) {
   struct thread_struct *next_thread = &next->thread_struct;  
   /*Load the esp0 in the TSS*/
   setup_tss(next,prev);

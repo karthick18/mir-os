@@ -1,5 +1,6 @@
-LD = ld
+LD = ld -m elf_i386
 CFLAGS += $(DEBUG) $(DEFINES)
+CC := gcc -m32 -fno-stack-protector
 
 %.s: %.c
 	$(CC) $(CFLAGS) -S $< > $@

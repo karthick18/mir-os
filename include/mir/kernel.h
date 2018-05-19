@@ -27,8 +27,8 @@ typedef unsigned int size_t;
 
 #include <mir/stdarg.h>
 
-
-extern int printf(const char *fmt,...);
+#define printf mir_printf
+extern int mir_printf(const char *fmt,...);
 extern int getstr(char *);
 extern int vsprintf(char *,const char *fmt,va_list);
 extern char *sprintf(char *,const char *fmt,...);

@@ -17,6 +17,7 @@ static void function_##index(void *arg) { \
   struct pcb *pcb = (struct pcb *)arg;\
   printf("process (%s:ppid %d)\n",pcb->name,pcb->ppid);\
   slab_free(arg);\
+  sleep(30);\
 }
 
 MY_TEST_TASK(function,1)
@@ -78,6 +79,7 @@ static int stress_test_mir(void) {
     if( (pcb = slab_alloc(sizeof(*pcb) , 0 ) ) ) {
       strncpy(pcb->name,name,MAX_NAMELEN);
       pcb->ppid = current->pid;
+      printf("Creating task: %s\n", pcb->name);
       create_task_name((unsigned long)functions[i-1],pcb->name,(void *)pcb);
     }
     else {

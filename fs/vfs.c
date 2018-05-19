@@ -3,7 +3,7 @@
      ;
      ;                   i) Pratap P.V. (pratap_theking@hotmail.com)
      ;                  ii)A.R.Karthick
-     ;    <a_r_karthic@rediffmail.com,karthick_r@infosys.com>
+     ;    <a.r.karthick@gmail.com,a_r_karthic@rediffmail.com>
      ;
      ;    This program is free software; you can redistribute it and/or modify
      ;    it under the terms of the GNU General Public License as published by

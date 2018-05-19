@@ -1,0 +1,15 @@
+*.o
+*.o.*
+*.a
+*.ko
+*.so
+*.i
+*.elf
+*.bin
+*.patch
+*~
+*.dep
+*.img
+*.log
+*.out
+include/asm

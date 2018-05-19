@@ -8,42 +8,34 @@
 
 First untar the Mir sources and cd to the directory containing the sources.
 
-  1) Bootstrapping MIR through Floppy:
-   Its very simple to install MIR on a floppy.
-   If the floppy hasnt been setup with GRUB and the standard MIR setup,
-   type the following:
-  
-   "./make_boot or sh make_boot"
-   And then type:
-    "make"
-  Thats it!! You can bootstrap your floppy with MIR.
-
- 2) Bootstrapping MIR through BOCHS:
-   Just type "make"
+ 1) Bootstrapping MIR through BOCHS:
+   If you want to install prerequisites for the firt time, type: "sudo make prereq"
+   Subsequently, just type "make" and "sudo make install" to install
    Thats it for BOCHS !! Then fire MIR in action through BOCHS,by typing:
-   "bochs -q"
+   "bochs -q" (if stuck in bochs debugger, just type "c" to continue and you should be in MIR boot through GRUB)
    Bochs can be downloaded from bochs.sourceforge.net
 
  Bochs reads the config file bochsrc.txt that comes with the MIR tarball,
  and hence you neednt bother about that.
  Just make sure that you are in X when you type bochs -q
 
-3) Making the hard disk image for MIR to bootstrap through hard disk.
+2) Making the hard disk image for MIR to bootstrap through hard disk. 
    After making the image, make sure that you use bochsrc_disk.txt as the config file, and change the "path=hard_disk.img" accordingly to the image _name_ that you create, and also the "ata0-master" entry if you create an image of different size, as shown by the output of bximage.
  Do the following to create ~10MB hard disk image for BOCHS.
-  3.1) bximage
+  2.1) bximage
  Create the hard disk image by typing the above command "bximage" that is interactive.
- 3.2) Copy the grubimg directly into this.
+ 2.2) Copy the grubimg directly into this.
  Setup the loopback device to point to the hard disk image.
  losetup -d /dev/loop0
  losetup /dev/loop0 hard_disk.img
  dd if=grubimg of=/dev/loop0 bs=1k 
  Now create a partition through "fdisk".
  Make sure to delete the stray partitions that it will show.
- 3.3) Change the "boot:" section in BOCHS to:
+ 2.3) Change the "boot:" section in BOCHS to:
   "boot: disk"
 
-4) MIR SHELL prompt commands:
+
+3) MIR SHELL prompt commands:
 
 Type "help" for the commands available.
 You have virtual console support also with MIR. To use virtual consoles 

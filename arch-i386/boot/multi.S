@@ -1,6 +1,6 @@
 /*   MIR-OS : Boot loader interface with GRUB
 ;    Copyright (C) 2003 A.R.Karthick  
-;   <a_r_karthic@rediffmail.com,karthick_r@infosys.com>
+;   <a.r.karthick@gmail.com,a_r_karthic@rediffmail.com>
 ; This program is free software; you can redistribute it and/or
 ; modify it under the terms of the GNU General Public License
 ;as published by the Free Software Foundation; either version 2
@@ -28,7 +28,7 @@
 #define MULTIBOOT_HEADER_FLAGS 0x3
 #define CHECKSUM -(MULTIBOOT_HEADER_MAGIC + MULTIBOOT_HEADER_FLAGS)
 .global _start , _gdt_desc,_idt_desc,_gdt_entries
-.extern kmain ,start_paging , printf, _idt_entries
+.extern kmain ,start_paging , mir_printf, _idt_entries
 
 _start:
 cli
@@ -166,7 +166,7 @@ unknown_interrupt_handler:
 	mov %ax,%es
 	mov %ax,%ss
 	pushl $error_msg
-	call printf
+	call mir_printf
 	addl $4,%esp
 	pop %es
 	pop %ds

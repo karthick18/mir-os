@@ -1,7 +1,7 @@
 ##Makefile for the MIR kernel
-CC := gcc
+CC := gcc -m32 -fno-stack-protector
 TOPDIR := $(shell pwd)
-ARCH   := $(shell uname -m | sed -e 's,i.86,i386,')
+ARCH   := i386
 SUBDIRS := init arch-$(ARCH)/kernel arch-$(ARCH)/boot drivers/ fs kernel mm ipc modules utils 
 BOCHS  := y
 ifeq ($(strip $(BOCHS)),y)
@@ -21,10 +21,12 @@ DEFINES := -fomit-frame-pointer  -fno-common -fno-strict-aliasing
 AFLAGS := $(ENVFLAGS) -felf
 BOOTFILES := arch-$(ARCH)/boot/multiboot.o
 BUILD_MIR := wrt
-export AFLAGS ENVFLAGS DEFINES TOPDIR ARCH EXTRA_FLAGS
+export AFLAGS ENVFLAGS DEFINES TOPDIR ARCH EXTRA_FLAGS CC
 
-all:   create_symlink mir_all cat
-
+all: create_symlink mir_all
+install: cat
+prereq:
+	@ (apt-get -y install bochs bochs-x libc6-dev-i386 dosfstools)
 create_symlink:
 	@ (\
 	if ! test -d $(TOPDIR)/include/asm;\

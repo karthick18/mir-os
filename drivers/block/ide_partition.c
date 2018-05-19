@@ -1,5 +1,5 @@
 /* MIR-OS IDE partition reader
-   ;   a_r_karthic@rediffmail.com ; karthick_r@infosys.com
+   ;   a.r.karthick@gmail.com ; a_r_karthic@rediffmail.com
    ;  
    ;    Copyright (C) 2003-2004
    ;              i) TABOS team.
@@ -143,7 +143,7 @@ int get_partitiontable( ulong dev)
   /* check if it is a valid partition table */
   if ( partition_buffer[ 510 ] != 0x55 || partition_buffer[ 511 ] != 0xaa )
     {
-      printf( "%x %x\n", partition_buffer[ 510 ], partition_buffer[ 511 ] );
+        printf( "%x %x (%x %x)\n", partition_buffer[ 510 ], partition_buffer[ 511 ], partition_buffer[0], partition_buffer[1] );
       printf( "Invalid partition table!\n" );
       goto out_release;
     }

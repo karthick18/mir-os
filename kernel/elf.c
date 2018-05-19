@@ -1,6 +1,6 @@
 /*   MIR-OS : Dynamic ELF Loader
 ;    Copyright (C) 2003-2004 A.R.Karthick 
-;    <a_r_karthic@rediffmail.com,karthick_r@infosys.com>
+;    <a.r.karthick@gmail.com,a_r_karthic@rediffmail.com>
 ;    Pratap P.V - pratap_theking@hotmail.com
 ;
 ;    This program is free software; you can redistribute it and/or modify

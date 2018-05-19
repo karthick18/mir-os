@@ -1,7 +1,7 @@
 /*   MIR-OS : MOUSE driver
 ;    Copyright (C) 2003 Pratap Pv 
 ;    Pratap Pv - pratap@starch.tk
-;    A.R.Karthick - <a_r_karthic@rediffmail.com,karthick_r@infosys.com>
+;    A.R.Karthick - <a.r.karthick@gmail.com,a_r_karthic@rediffmail.com>
 ;
 ;    This program is free software; you can redistribute it and/or modify
 ;    it under the terms of the GNU General Public License as published by

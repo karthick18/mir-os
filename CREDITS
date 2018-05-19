@@ -3,10 +3,11 @@ Thanks,
  -Karthick
 
 N: A.R.Karthick
-E: karthick_r@infosys.com
-E: a_r_karthic@rediffmail.com,a_r_karthic@yahoo.com,a.r.karthick@gmail.com
+E: a.r.karthick@gmail.com
+E: a.r.karthick@gmail.com,a_r_karthic@rediffmail.com
 W: http://mir-os.sourceforge.net
-W: http://kernelnewbies.org/wiki/moin.cgi/Karthick
+W: http://github.com/karthick18
+W: https://kernelnewbies.org/Karthick
 D: Implemented Process Mgmt,Memory Mgmt, CPU Exception handling,etc.
 D: Implemented various memory allocators like bitmap,slab cache,vmalloc
 D: Enabled page tables 
@@ -18,6 +19,7 @@ D: Ported IDE and CDROM from TABOS and modified it to work with MIR
 D: RMMOD, EXPORT_SYMBOL and other support for Dynamic Module loading.
 D: VFS + FILE Management
 D: Various other random hacks to the MIR subsystem in general.
+S: USA
 S: Bangalore
 S: Chennai
 

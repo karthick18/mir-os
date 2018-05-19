@@ -1,4 +1,6 @@
-
+#include <mir/kernel.h>
+#include <mir/sched.h>
+#include <mir/module.h>
 extern int export_symbol;
 extern int temp;
 int init_module(int argc,char **argv) {

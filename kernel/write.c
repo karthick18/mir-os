@@ -23,7 +23,7 @@ return buf;
 }
 
 
-int printf (const char *fmt, ...) {
+int mir_printf (const char *fmt, ...) {
 /* from linux 0.0.1 */
 char buf[1024+1];
 va_list args;

@@ -16,6 +16,7 @@
 
 
 #define FASTCALL(fun)    fun __attribute__ ( (regparm(3)) )
+#define FASTCALL_DEFINE(fun) __attribute__( (regparm(3)) ) fun
 
 #include <asm/thread.h>
 

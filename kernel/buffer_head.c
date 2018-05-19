@@ -1,5 +1,5 @@
    /* MIR-OS BUFFER Cache
-   ;   a_r_karthic@rediffmail.com ; karthick_r@infosys.com
+   ;   a.r.karthick@gmail.com ; a_r_karthic@rediffmail.com
    ;  
    ;    Copyright (C) 2004
    ;
