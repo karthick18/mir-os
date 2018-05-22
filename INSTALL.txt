@@ -13,6 +13,8 @@ First untar the Mir sources and cd to the directory containing the sources.
    Subsequently, just type "make" and "sudo make install" to install
    Thats it for BOCHS !! Then fire MIR in action through BOCHS,by typing:
    ./start.sh
+   You need X for display.
+   So if your host is a MAC and linux is a guest, then use ssh -Y user@<guest_ip> before starting from the guest.
  It uses bochs PC emulator to start MIR.
  Bochs reads the config file bochsrc.txt that comes with the MIR tarball,
  and hence you needn't bother about that.
