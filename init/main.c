@@ -131,12 +131,12 @@ int __init  kmain (mb_info_t *mb) {
 static void task1() {
   int w=0, fd, n;
   unsigned char blk[512*109];
-  if ( (fd = mir_open ("logo.sys", 0)) < 0) {
+  if ( (fd = vfs_open ("logo.sys", 0)) < 0) {
     printf("Unable to open file:%s\n","logo.sys");
     goto out;
   }
   while (1) {
-    n = mir_read (fd, blk+512*w, 512);
+    n = vfs_read (fd, blk+512*w, 512);
     if (n==0)
       break;
     w++;

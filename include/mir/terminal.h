@@ -85,9 +85,11 @@ struct term {
   struct termios termio;
   char            outputbuf [MAX_OUTPUT];
 #ifndef VESA
-  unsigned char   backup[SCREEN_BUFFER];
+  unsigned char   backup[SCREEN_BUFFER_BACKUP];
   unsigned char   *screen;
   int attr;
+  int cur_backup_row;
+  int cur_scroll_row;
 #endif
   int has_shell;
   int x,y;
@@ -104,7 +106,8 @@ struct term {
   /* below only for screen terminals */
   void (*clear) ();
   void (*scroll) ();
-
+  void (*scroll_up)(int pages);
+  void (*scroll_down)(int pages);
 };
 
 extern void terminal_init (struct term *tty);

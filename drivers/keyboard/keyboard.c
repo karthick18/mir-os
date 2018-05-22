@@ -256,7 +256,7 @@ static int keyb_interrupt(int irq,void *device,struct thread_regs *regs)
       key_extended = 1;
       goto end;
     }
-
+  
   /* convert from hardware to readable format */
   if ( key_extended )
     {
@@ -466,6 +466,18 @@ static int keyb_interrupt(int irq,void *device,struct thread_regs *regs)
 	    else
 	      {
 		/* normal key */
+		if(mycode == KEY_UP) {
+		  if(current_term->scroll_up) {
+		    current_term->scroll_up(1);
+		  }
+		  goto end;
+		}
+		if(mycode == KEY_DOWN) {
+		  if(current_term->scroll_down) {
+		    current_term->scroll_down(1);
+		  }
+		  goto end;
+		}
 		i = key_ascii_table[ mycode ];
 	      }
 

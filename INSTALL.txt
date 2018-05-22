@@ -12,11 +12,10 @@ First untar the Mir sources and cd to the directory containing the sources.
    If you want to install prerequisites for the firt time, type: "sudo make prereq"
    Subsequently, just type "make" and "sudo make install" to install
    Thats it for BOCHS !! Then fire MIR in action through BOCHS,by typing:
-   "bochs -q" (if stuck in bochs debugger, just type "c" to continue and you should be in MIR boot through GRUB)
-   Bochs can be downloaded from bochs.sourceforge.net
-
+   ./start.sh
+ It uses bochs PC emulator to start MIR.
  Bochs reads the config file bochsrc.txt that comes with the MIR tarball,
- and hence you neednt bother about that.
+ and hence you needn't bother about that.
  Just make sure that you are in X when you type bochs -q
 
 2) Making the hard disk image for MIR to bootstrap through hard disk. 

@@ -48,35 +48,77 @@ static int text_switch(int nr)
   return err;
 }
 
-static void text_scroll (void) {
-unsigned char *dst = current_term->screen;
-unsigned char *src = (current_term->screen+ SCREEN_WIDTH );
-memcpy(dst,src,SCREEN_BUFFER - SCREEN_WIDTH);
-memset_words(dst + (SCREEN_BUFFER - SCREEN_WIDTH),0x0720,SCREEN_WIDTH/2);
+static void scroll(int rows, int dir) {
+  unsigned char *dst = current_term->screen;
+  unsigned char *src;
+  int start_src;
+  int backup_row;
+  if(current_term->cur_scroll_row < 0) {
+    if(dir > 0) {
+      return;
+    }
+    current_term->cur_scroll_row = current_term->cur_backup_row;
+  }
+  backup_row = current_term->cur_scroll_row - rows;
+  if((backup_row + dir) < 0) {
+    return;
+  }
+  start_src = (backup_row + dir)*SCREEN_WIDTH;
+  src = current_term->backup  + start_src;
+  memcpy(dst,src,SCREEN_BUFFER);
+  current_term->cur_scroll_row += dir;
+  if(current_term->cur_scroll_row >= current_term->cur_backup_row) {
+    current_term->cur_scroll_row = -1;
+    memset_words(dst + (SCREEN_BUFFER - SCREEN_WIDTH),0x0720,SCREEN_WIDTH/2);    
+    updatecur(current_term->x, current_term->y);
+  }
 }
-  
+
+static void scroll_up(int pages) {
+  scroll(pages * ROWS, -1);
+}
+
+static void scroll_down(int pages) {
+  scroll(pages * ROWS, 1);
+}
+
+static void text_scroll (void) {
+  unsigned char *dst = current_term->screen;
+  unsigned char *src = (current_term->screen+ SCREEN_WIDTH );
+  memcpy(dst,src,SCREEN_BUFFER - SCREEN_WIDTH);
+  memset_words(dst + (SCREEN_BUFFER - SCREEN_WIDTH),0x0720,SCREEN_WIDTH/2);
+}
+
 static int text_write(char *r, int len) {
   unsigned char *d = (char *)current_term->screen;
-  int i, k, attr = current_term->attr;
+  unsigned char *backup = (char *)current_term->backup;
+  int i, k, k_backup, attr = current_term->attr;
   for (i=0; i< len; i++) {
     k = SCREEN_WIDTH*current_term->y + current_term->x*2;
+    k_backup = SCREEN_WIDTH * current_term->cur_backup_row + current_term->x*2;
     switch (r[i]) {
-    case '\n': { 
+    case '\n': {
+      current_term->cur_backup_row++;
       current_term->y++; current_term->x=0;
       if (current_term->y==ROWS) {
 	text_scroll();
 	--current_term->y;
       }
+      if(current_term->cur_backup_row >= BACKUP_ROWS) {
+	current_term->cur_backup_row = BACKUP_ROWS-1;
+      }
       updatecur (current_term->x, current_term->y);
       break;
     }
     case BACKSPACE: {
-      --current_term->x; k-=2;
+      --current_term->x; k-=2; k_backup -= 2;
       if (current_term->x==0){
 	--current_term->y; current_term->x = COLS;
+	--current_term->cur_backup_row;
       }
       updatecur(current_term->x, current_term->y);
       d[k] = ' ';
+      backup[k_backup] = ' ';
       break;
     }
     case '\t': {
@@ -88,20 +130,23 @@ static int text_write(char *r, int len) {
     }
 		  
     default: {
-      d[k] = (char) r[i];
-      d[k+1] = (char) attr;
+      backup[k_backup] = d[k] = (char) r[i];
+      backup[k_backup+1] = d[k+1] = (char) attr;
       ++current_term->x;
 
       if (current_term->x==COLS) {
 	current_term->x = 0;
 	++current_term->y;
+	++current_term->cur_backup_row;
       }
 		
       if (current_term->y==ROWS) {
 	text_scroll();
 	--current_term->y;
       }
-
+      if(current_term->cur_backup_row >= BACKUP_ROWS) {
+	current_term->cur_backup_row = BACKUP_ROWS - 1;
+      }
       updatecur (current_term->x, current_term->y);
       break;
     }
@@ -112,15 +157,19 @@ static int text_write(char *r, int len) {
 
 void text_init (struct term *tty)  {
   terminal_init (tty);
-  memset_words(tty->backup,0x0720,SCREEN_BUFFER/2);
+  memset_words(tty->backup,0x0720,SCREEN_BUFFER_BACKUP/2);
   tty->screen = SCREEN_VIDEO;
   tty->write = text_write;
   tty->clear = text_clrscr;
   tty->scroll = text_scroll;
+  tty->scroll_up = scroll_up;
+  tty->scroll_down = scroll_down;
   tty->tty_switch = text_switch;
   tty->attr   = 0xf;
   tty->has_shell = 0;
   tty->x = 0,tty->y = 0;
+  tty->cur_backup_row = 0;
+  tty->cur_scroll_row = -1;
 }
 
 #endif
