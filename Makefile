@@ -25,7 +25,7 @@ export AFLAGS ENVFLAGS DEFINES TOPDIR ARCH EXTRA_FLAGS CC
 
 all: prereq create_symlink mir_all
 prereq:
-	$(shell ./install-prerequisites.sh)
+	@./install-prerequisites.sh
 install: cat
 create_symlink:
 	@ (\
