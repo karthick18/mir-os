@@ -23,10 +23,10 @@ BOOTFILES := arch-$(ARCH)/boot/multiboot.o
 BUILD_MIR := wrt
 export AFLAGS ENVFLAGS DEFINES TOPDIR ARCH EXTRA_FLAGS CC
 
-all: create_symlink mir_all
-install: cat
+all: prereq create_symlink mir_all
 prereq:
-	@ (apt-get -y install bochs bochs-x libc6-dev-i386 dosfstools)
+	$(shell ./install-prerequisites.sh)
+install: cat
 create_symlink:
 	@ (\
 	if ! test -d $(TOPDIR)/include/asm;\
